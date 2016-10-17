@@ -25,6 +25,11 @@ class FollowerCell: UITableViewCell {
 
   @IBAction func followButtonPressed(_ sender: AnyObject) {
     print(#function)
+    if followInfoLabel.text == isNotFollowingString {
+        followInfoLabel.text = isFollowingString
+    } else {
+        followInfoLabel.text = isNotFollowingString
+    }
   }
   
   func setUIForCurrentFollowingState() {

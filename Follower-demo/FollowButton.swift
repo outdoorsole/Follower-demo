@@ -9,13 +9,31 @@
 import UIKit
 
 class FollowButton: UIButton {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+  
+  override init(frame: CGRect) {
+    followState = .isNotFollowing
+    super.init(frame: frame)
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    followState = .isNotFollowing
+    super.init(coder: aDecoder)
+  }
+  
+  enum FollowState {
+    case isFollowing
+    case isNotFollowing
+  }
+  
+  var followState: FollowState {
+    didSet {
+      switch followState {
+      case .isFollowing:
+        setTitle("✅", for: .normal)
+      case .isNotFollowing:
+        setTitle("❌", for: .normal)
+      }
     }
-    */
+  }
 
 }

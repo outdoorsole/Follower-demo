@@ -9,16 +9,31 @@
 import UIKit
 
 class FollowerCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+  
+  let isFollowingString = "You are following this user"
+  let isNotFollowingString = "You are not following this user"
+  
+  @IBOutlet weak var nameLabel: UILabel!
+  @IBOutlet weak var followInfoLabel: UILabel!
+  @IBOutlet weak var followButton: FollowButton!
+  
+  var user: User! {
+    didSet {
+      setUIForCurrentFollowingState()
     }
+  }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+  @IBAction func followButtonPressed(_ sender: AnyObject) {
+    print(#function)
+  }
+  
+  func setUIForCurrentFollowingState() {
+    nameLabel.text = user.name
+    followInfoLabel.text = user.isFollowing ? isFollowingString : isNotFollowingString
+    followButton.followState = user.isFollowing ? .isFollowing : .isNotFollowing
+  }
 
 }
+
+
+

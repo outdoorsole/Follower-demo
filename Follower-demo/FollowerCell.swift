@@ -8,15 +8,15 @@
 
 import UIKit
 
-//protocol FollowerCellDelegate: class {
-//
-//}
+protocol FollowerCellDelegate: class {
+    func updateUser(user: User)
+}
 
 class FollowerCell: UITableViewCell {
     
     // Add the delegate property, set weak since it is a class protocol. The optional type will set it to nil
-    //  weak var delegate: FollowerCellDelegate?
-    weak var followerTableViewController: FollowerTableViewController!
+    weak var delegate: FollowerCellDelegate?
+    
     
     let isFollowingString = "You are following this user"
     let isNotFollowingString = "You are not following this user"
@@ -33,7 +33,7 @@ class FollowerCell: UITableViewCell {
     
     @IBAction func followButtonPressed(_ sender: AnyObject) {
         print(#function, user)
-        followerTableViewController.updateUser(user: user)
+        delegate?.updateUser(user: user)
     }
     
     func setUIForCurrentFollowingState() {

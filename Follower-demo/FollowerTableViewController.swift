@@ -8,7 +8,9 @@
 
 import UIKit
 
-class FollowerTableViewController: UITableViewController {
+class FollowerTableViewController: UITableViewController, FollowerCellDelegate {
+    
+    
     
     // Set the initial default state for each user to NOT following
     var users: [User] =  [
@@ -25,6 +27,7 @@ class FollowerTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Following"
+
     }
     
     
@@ -41,10 +44,22 @@ class FollowerTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FollowerCell") as! FollowerCell
         cell.user = users[indexPath.row]
         print("cell.user in tableView function: \(cell.user)")
+//        cell.followerTableViewController = self
+        cell.delegate = self
+        
         return cell
     }
     
     func updateUser(user: User) {
         print(user)
+        for i in 0..<users.count {
+            let currentUser = users[i]
+            if user.name == currentUser.name {
+                users[i].isFollowing = !users[i].isFollowing
+            }
+        }
+        tableView.reloadData()
+        
     }
+    
 }
